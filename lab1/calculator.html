@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Калькулятор</title>
+  <link rel="stylesheet" href="calculator.css">
+</head>
+<body>
+  <div class="calculator-container">
+    <div class="header-bar">
+      <button class="theme-toggle" id="themeToggle">🌙</button>
+
+      <select class="dropdown-select" id="operationSelect">
+        <option value="calc">Обычный</option>
+        <option value="scientific">Инженерный</option>
+        <option value="programmer">Программист</option>
+      </select>
+
+      <details class="header-details">
+        <summary>Автор</summary>
+        <div class="details-popup">
+          <p><strong>ФИО:</strong> Луценко А.И.</p>
+          <p><strong>Группа:</strong> ИУ5-41Б</p>
+        </div>
+      </details>
+
+      <a href="https://github.com/alexandralu5/PSP/tree/Introduction_to_Web" target="_blank" class="github-link">
+        GitHub
+      </a>
+    </div>
+
+    <div class="calculator" id="calculator">
+      <div id="result" class="result">0</div>
+
+      <div class="buttons">
+        <div class="button-row">
+          <button id="btn_op_clear" class="my-btn secondary">C</button>
+          <button id="btn_op_sign" class="my-btn secondary">+/-</button>
+          <button id="btn_op_percent" class="my-btn secondary">%</button>
+          <button id="btn_op_div" class="my-btn secondary">/</button>
+        </div>
+        <div class="button-row">
+          <button id="btn_digit_7" class="my-btn">7</button>
+          <button id="btn_digit_8" class="my-btn">8</button>
+          <button id="btn_digit_9" class="my-btn">9</button>
+          <button id="btn_op_mult" class="my-btn primary">x</button>
+        </div>
+        <div class="button-row">
+          <button id="btn_digit_4" class="my-btn">4</button>
+          <button id="btn_digit_5" class="my-btn">5</button>
+          <button id="btn_digit_6" class="my-btn">6</button>
+          <button id="btn_op_minus" class="my-btn primary">-</button>
+        </div>
+        <div class="button-row">
+          <button id="btn_digit_1" class="my-btn">1</button>
+          <button id="btn_digit_2" class="my-btn">2</button>
+          <button id="btn_digit_3" class="my-btn">3</button>
+          <button id="btn_op_plus" class="my-btn primary">+</button>
+        </div>
+        <div class="button-row">
+          <button id="btn_digit_0" class="my-btn">0</button>
+          <button id="btn_digit_dot" class="my-btn primary">.</button>
+          <button id="btn_op_equal" class="my-btn primary execute">=</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lab-goal">
+      Цель данной лабораторной работы -
+      <span class="highlight">знакомство</span>
+      с инструментами построения пользовательских интерфейсов web-сайтов:
+      <span class="highlight">HTML</span>,
+      <span class="highlight">CSS</span>.
+    </div>
+
+    <div class="footer-signature">
+      ЛР выполнена Луценко А.И.
+    </div>
+  </div>
+
+  <script src="calculator.js"></script>
+</body>
+</html>
