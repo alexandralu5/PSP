@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "src": "https://i.pinimg.com/originals/c9/ea/65/c9ea654eb3a7398b1f702c758c1c4206.jpg",
+    "title": "Акция 1",
+    "text": "Такой акции вы еще не видели 1"
+  },
+  {
+    "id": 2,
+    "src": "https://i.pinimg.com/originals/c9/ea/65/c9ea654eb3a7398b1f702c758c1c4206.jpg",
+    "title": "Обновленное название 2.0",
+    "text": "Обновленное описание 2.0"
+  },
+  {
+    "id": 3,
+    "src": "https://i.pinimg.com/originals/c9/ea/65/c9ea654eb3a7398b1f702c758c1c4206.jpg",
+    "title": "Акция 3",
+    "text": "Такой акции вы еще не видели 3"
+  },
+  {
+    "id": 5,
+    "src": "https://static.wikia.nocookie.net/symbolism/images/9/99/Sea.jpg/revision/latest/scale-to-width-down/3888?cb=20250401212251",
+    "title": "Новая акция",
+    "text": "Описание новой акции"
+  },
+  {
+    "id": 6,
+    "src": "https://static.wikia.nocookie.net/symbolism/images/9/99/Sea.jpg/revision/latest/scale-to-width-down/3888?cb=20250401212251",
+    "title": "Новая акция",
+    "text": "Описание новой акции"
+  },
+  {
+    "id": 7,
+    "src": "https://static.wikia.nocookie.net/symbolism/images/9/99/Sea.jpg/revision/latest/scale-to-width-down/3888?cb=20250401212251",
+    "title": "Еще одна новая акция",
+    "text": "Описание новой акции"
+  }
+]
