@@ -7,7 +7,7 @@ export class BackButtonComponent {
         return (
             `
                 <button class="btn btn-secondary mb-4" id="back-button">
-                    🐾 ← Назад к списку кошек 
+                    ← Назад к списку оборудования
                 </button>
             `
         );

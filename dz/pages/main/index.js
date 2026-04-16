@@ -1,19 +1,11 @@
 import { ProductCardComponent } from "../../components/product-card/index.js";
-import { CatPage } from "../cat/index.js";
-import {
-    concatenate,
-    erase,
-    sumUnique,
-    merge,
-    findFirstActiveCat,
-    getAvailableCatAfterTime
-} from "../../utils/catUtils.js";
+import { EquipmentPage } from "../equipment/index.js";
 
 export class MainPage {
     constructor(parent) {
         this.parent = parent;
-        this.catsData = this.getData();
-        this.demonstrateFunctions();
+        this.searchTerm = '';
+        this.equipmentData = this.getData();
     }
 
     get pageRoot() {
@@ -24,9 +16,16 @@ export class MainPage {
         return (
             `
                 <div class="container py-4">
-                    <h1 class="text-center mb-4">🐾 Кошкин дом </h1>
-                    <p class="text-center text-muted mb-4"> Нажмите "Подробнее", чтобы узнать больше о каждой кошке </p>
-                    <div id="main-page" class="row row-cols-1 row-cols-md-3 g-4"></div>
+                    <h1 class="text-center mb-4">Лабораторное оборудование</h1>
+                    <p class="text-center text-muted mb-4">Нажмите "Подробнее", чтобы узнать больше об оборудовании</p>
+
+                    <div class="search-container">
+                        <input type="text" class="search-input" id="search-input" placeholder="Поиск оборудования..." autocomplete="off">
+                    </div>
+
+                    <div id="main-page" class="row g-4"></div>
+
+                    <div id="task-results" class="task-results mt-5"></div>
                 </div>
             `
         );
@@ -36,118 +35,196 @@ export class MainPage {
         return [
             {
                 id: 1,
-                src: "https://i.pinimg.com/736x/96/91/0c/96910c8a23f6b80db45a9333b1aa9a79.jpg",
-                title: "Пуша",
-                text: "",
-                breed: "Сиамская",
-                age: 2,
-                character: "Ласковая, игривая",
-                isAvailable: true,
-                chipNumber: 101,
-                traits: ['ласковая', 'игривая', 'общительная']
+                src: "https://cdn.pixabay.com/photo/2016/06/13/12/44/microscope-1454130_640.jpg",
+                title: "Микроскоп",
+                text: "Оптический микроскоп для лабораторных исследований",
+                type: "Оптический микроскоп",
+                magnification: "1000x",
+                resolution: "0.2 мкм"
             },
             {
                 id: 2,
-                src: "https://i.pinimg.com/1200x/b8/59/54/b859544fcc7fdf1a79af2302fec88c62.jpg",
-                title: "Барсик",
-                text: "",
-                breed: "Британский",
-                age: 3,
-                character: "Энергичный, активный",
-                isAvailable: true,
-                chipNumber: 102,
-                traits: ['энергичный', 'активный', 'любознательный']
+                src: "https://cdn.pixabay.com/photo/2018/02/21/13/17/centrifuge-3169758_640.jpg",
+                title: "Центрифуга",
+                text: "Лабораторная центрифуга для разделения жидкостей",
+                type: "Лабораторная центрифуга",
+                speed: "15000 об/мин",
+                capacity: "24 пробирки"
             },
             {
                 id: 3,
-                src: "https://i.pinimg.com/1200x/f9/b9/e1/f9b9e1b498d84cb1e4bd3deb99792a9e.jpg",
-                title: "Рыжик",
-                text: "",
-                breed: "Персидский",
-                age: 5,
-                character: "Спокойный, ласковый",
-                isAvailable: false,
-                chipNumber: 103,
-                traits: ['спокойный', 'ласковый', 'флегматичный']
+                src: "https://cdn.pixabay.com/photo/2016/11/29/09/08/beaker-1869024_640.jpg",
+                title: "Спектрофотометр",
+                text: "УФ-видимый спектрофотометр",
+                type: "УФ-видимый спектрофотометр",
+                wavelength: "190-1100 нм",
+                accuracy: "±0.5 нм"
             },
             {
                 id: 4,
-                src: "https://i.pinimg.com/736x/1e/af/80/1eaf80e28f0287bc24dd4b9a884ebda8.jpg",
-                title: "Мурка",
-                text: "",
-                breed: "Абиссинский",
-                age: 1,
-                character: "Общительный, дружелюбный",
-                isAvailable: true,
-                chipNumber: 104,
-                traits: ['общительный', 'дружелюбный', 'энергичный']
-            },
-            {
-                id: 5,
-                src: "https://i.pinimg.com/736x/6f/7e/c0/6f7ec079e436a3971572c93abe2d9eb8.jpg",
-                title: "Черныш",
-                text: "",
-                breed: "Бомбейский",
-                age: 4,
-                character: "Грациозный, спокойный",
-                isAvailable: true,
-                chipNumber: 105,
-                traits: ['грациозный', 'спокойный', 'независимый']
-            },
-            {
-                id: 6,
-                src: "https://i.pinimg.com/1200x/fd/89/c1/fd89c128e3b109f677a45243cdfef80f.jpg",
-                title: "Симба",
-                text: "",
-                breed: "Мейн-кун",
-                age: 2,
-                character: "Гордый, независимый",
-                isAvailable: false,
-                chipNumber: 106,
-                traits: ['гордый', 'независимый', 'сильный']
+                src: "https://cdn.pixabay.com/photo/2019/10/15/14/43/thermal-cycler-4552717_640.jpg",
+                title: "Термоциклер",
+                text: "ПЦР-амплификатор для проведения ПЦР",
+                type: "ПЦР-амплификатор",
+                temperature: "4-99°C",
+                capacity: "96 пробирок"
             }
         ];
     }
 
-    demonstrateFunctions() {
-        console.log(' Демонстрация функций ДЗ ');
-
-        const catTraits = ['ласковая', 'игривая', 'общительная'];
-        const concatenatedTraits = concatenate(catTraits, ' • ');
-        console.log('1.1 concatenate (характеристики кошки):', concatenatedTraits);
-
-        const agesWithInvalid = [2, 0, 3, null, 1, undefined, '', 5];
-        const validAges = erase(agesWithInvalid);
-        console.log('1.10 erase (валидные возраста кошек):', validAges);
-
-        const chipNumbers = [101, 102, 101, 103, 104, 102, 105, 106];
-        const uniqueSum = sumUnique(chipNumbers);
-        console.log('2.8 sumUnique (сумма уникальных номеров чипов):', uniqueSum);
-
-        const catBasicInfo = { name: 'Мурка', age: 2, breed: 'Сиамская' };
-        const catExtraInfo = { color: 'белый', character: 'ласковая', age: 3 };
-        const catHealthInfo = { vaccinated: true, sterilized: true };
-        const mergedCat = merge(catBasicInfo, catExtraInfo, catHealthInfo);
-        console.log('3.1 merge (объединенная информация о кошке):', mergedCat);
-
-        const currentHour = new Date().getHours();
-        const availableCat = getAvailableCatAfterTime(this.catsData, currentHour);
-        if (availableCat) {
-            console.log(`Цикл с постусловием (доступная кошка): ${availableCat.title}`);
+    // ============ ЗАДАНИЕ 1.1 (1 уровень) ============
+    concatenate(strings, separator) {
+        let result = '';
+        for (let i = 0; i < strings.length; i++) {
+            result += strings[i];
+            if (i < strings.length - 1) {
+                result += separator;
+            }
         }
+        return result;
+    }
 
-        const firstActiveCat = findFirstActiveCat(this.catsData);
-        if (firstActiveCat) {
-            console.log('Первая активная кошка для усыновления:', firstActiveCat.title);
+    // ============ ЗАДАНИЕ 1.10 (1 уровень) ============
+    erase(array) {
+        const result = [];
+        for (let i = 0; i < array.length; i++) {
+            if (array[i] !== false && array[i] !== undefined && array[i] !== '' && array[i] !== 0 && array[i] !== null) {
+                result.push(array[i]);
+            }
         }
+        return result;
+    }
 
-        console.log('=============================================================');
+    // ============ ЗАДАНИЕ 2.8 (2 уровень) ============
+    sumUnique(array) {
+        const uniqueValues = [];
+        let sum = 0;
+
+        for (let i = 0; i < array.length; i++) {
+            let isDuplicate = false;
+            for (let j = 0; j < uniqueValues.length; j++) {
+                if (uniqueValues[j] === array[i]) {
+                    isDuplicate = true;
+                    break;
+                }
+            }
+            if (!isDuplicate) {
+                uniqueValues.push(array[i]);
+                sum += array[i];
+            }
+        }
+        return sum;
+    }
+
+    // ============ ЗАДАНИЕ 3.1 (3 уровень) ============
+    merge(...objects) {
+        const result = {};
+        for (let i = 0; i < objects.length; i++) {
+            const obj = objects[i];
+            for (let key in obj) {
+                if (obj.hasOwnProperty(key) && result[key] === undefined) {
+                    result[key] = obj[key];
+                }
+            }
+        }
+        return result;
+    }
+
+    displayTaskResults() {
+        const equipmentNames = ['Микроскоп', 'Центрифуга', 'Спектрофотометр', 'Термоциклер', 'Автоклав'];
+
+        const concatenated = this.concatenate(equipmentNames, ' → ');
+
+        const mixedData = [0, 1, false, 2, undefined, '', 3, null, 4, 'pH-метр', 5];
+        const cleanedData = this.erase(mixedData);
+
+        const equipmentIds = [101, 102, 103, 101, 104, 102, 105, 103, 106];
+        const uniqueSum = this.sumUnique(equipmentIds);
+
+        const microscopeSpecs = { magnification: '1000x', resolution: '0.2 мкм', type: 'оптический' };
+        const centrifugeSpecs = { speed: '15000 об/мин', capacity: '24 пробирки', type: 'лабораторный' };
+        const spectrophotometerSpecs = { wavelength: '190-1100 нм', accuracy: '±0.5 нм', type: 'УФ-видимый' };
+        const mergedSpecs = this.merge(microscopeSpecs, centrifugeSpecs, spectrophotometerSpecs);
+
+        return `
+            <h5>Результаты выполнения заданий</h5>
+
+            <p><strong>Задание 1.1 (concatenate):</strong><br>
+            Массив: [${equipmentNames.join(', ')}]<br>
+            Результат склейки с разделителем ' → ': "${concatenated}"</p>
+
+            <p><strong>Задание 1.10 (erase):</strong><br>
+            Исходный массив: [${mixedData.map(v => v === '' ? "''" : v).join(', ')}]<br>
+            Очищенный массив: [${cleanedData.join(', ')}]</p>
+
+            <p><strong>Задание 2.8 (sumUnique):</strong><br>
+            Массив ID оборудования: [${equipmentIds.join(', ')}]<br>
+            Сумма уникальных элементов: ${uniqueSum}</p>
+
+            <p><strong>Задание 3.1 (merge):</strong><br>
+            Объект 1 (Микроскоп): ${JSON.stringify(microscopeSpecs)}<br>
+            Объект 2 (Центрифуга): ${JSON.stringify(centrifugeSpecs)}<br>
+            Объект 3 (Спектрофотометр): ${JSON.stringify(spectrophotometerSpecs)}<br>
+            Результат слияния: ${JSON.stringify(mergedSpecs)}</p>
+        `;
     }
 
     clickCard(e) {
         const cardId = e.target.dataset.id;
-        const catPage = new CatPage(this.parent, cardId);
-        catPage.render();
+        const equipmentPage = new EquipmentPage(this.parent, cardId);
+        equipmentPage.render();
+    }
+
+    setupSearch() {
+        const searchInput = document.getElementById('search-input');
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                this.searchTerm = e.target.value.toLowerCase();
+                this.filterAndRenderCards();
+            });
+        }
+    }
+
+    filterAndRenderCards() {
+        const filteredData = this.equipmentData.filter(item =>
+            item.title.toLowerCase().includes(this.searchTerm) ||
+            item.type.toLowerCase().includes(this.searchTerm) ||
+            (item.text && item.text.toLowerCase().includes(this.searchTerm))
+        );
+
+        const cardsContainer = this.pageRoot;
+        if (cardsContainer) {
+            cardsContainer.innerHTML = '';
+
+            const firstRow = filteredData.slice(0, 3);
+            const secondRow = filteredData.slice(3, 4);
+
+            if (firstRow.length > 0) {
+                const firstRowContainer = document.createElement('div');
+                firstRowContainer.className = 'row row-cols-1 row-cols-md-3 g-4 mb-4';
+                cardsContainer.appendChild(firstRowContainer);
+
+                firstRow.forEach((item) => {
+                    const productCard = new ProductCardComponent(firstRowContainer);
+                    productCard.render(item, this.clickCard.bind(this));
+                });
+            }
+
+            if (secondRow.length > 0) {
+                const secondRowContainer = document.createElement('div');
+                secondRowContainer.className = 'row';
+                cardsContainer.appendChild(secondRowContainer);
+
+                const leftCol = document.createElement('div');
+                leftCol.className = 'col-md-4';
+                secondRowContainer.appendChild(leftCol);
+
+                secondRow.forEach((item) => {
+                    const productCard = new ProductCardComponent(leftCol);
+                    productCard.render(item, this.clickCard.bind(this));
+                });
+            }
+        }
     }
 
     render() {
@@ -155,10 +232,13 @@ export class MainPage {
         const html = this.getHTML();
         this.parent.insertAdjacentHTML('beforeend', html);
 
-        const data = this.getData();
-        data.forEach((item) => {
-            const productCard = new ProductCardComponent(this.pageRoot);
-            productCard.render(item, this.clickCard.bind(this));
-        });
+        this.filterAndRenderCards();
+
+        const taskResultsDiv = document.getElementById('task-results');
+        if (taskResultsDiv) {
+            taskResultsDiv.innerHTML = this.displayTaskResults();
+        }
+
+        this.setupSearch();
     }
 }

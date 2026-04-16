@@ -5,67 +5,47 @@ export class NotificationComponent {
     }
 
     createContainer() {
-        if (!document.querySelector('.notification-toast-container')) {
+        if (!document.querySelector('.notification-container')) {
             const container = document.createElement('div');
-            container.className = 'notification-toast-container position-fixed bottom-0 end-0 p-3';
-            container.style.zIndex = '1080';
+            container.className = 'notification-container';
+            container.style.position = 'fixed';
+            container.style.bottom = '20px';
+            container.style.right = '20px';
+            container.style.zIndex = '9999';
             document.body.appendChild(container);
             this.container = container;
         } else {
-            this.container = document.querySelector('.notification-toast-container');
+            this.container = document.querySelector('.notification-container');
         }
     }
 
-    getHTML(message, type) {
-        const bgColor = {
-            'success': 'bg-success',
-            'info': 'bg-info',
-            'warning': 'bg-warning',
-            'error': 'bg-danger'
-        }[type] || 'bg-primary';
-
-        const icon = {
-            'success': '✅',
-            'info': 'ℹ️',
-            'warning': '⚠️',
-            'error': '❌'
-        }[type] || '📢';
-
-        const id = 'toast-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
-
-        return `
-            <div id="${id}" class="toast align-items-center text-white ${bgColor} border-0 mb-2" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true" data-bs-delay="5000">
-                <div class="d-flex">
-                    <div class="toast-body">
-                        <strong>${icon}</strong> ${message}
-                    </div>
-                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-                </div>
-            </div>
+    show(message, type = 'success') {
+        const notification = document.createElement('div');
+        notification.className = `alert alert-${type} alert-dismissible fade show`;
+        notification.style.marginTop = '10px';
+        notification.style.minWidth = '300px';
+        notification.style.animation = 'slideInRight 0.3s ease';
+        notification.innerHTML = `
+            <strong>✓</strong> ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         `;
-    }
 
-    show(message, type = 'info', duration = 5000) {
-        const html = this.getHTML(message, type);
-        this.container.insertAdjacentHTML('beforeend', html);
+        this.container.appendChild(notification);
 
-        const toastElement = this.container.lastElementChild;
-
-        if (typeof bootstrap !== 'undefined' && bootstrap.Toast) {
-            const toast = new bootstrap.Toast(toastElement, {
-                autohide: true,
-                delay: duration
-            });
-            toast.show();
-        } else {
-            toastElement.classList.add('show');
+        setTimeout(() => {
+            notification.classList.remove('show');
             setTimeout(() => {
-                toastElement.remove();
-            }, duration);
-        }
+                if (notification.parentNode) {
+                    notification.remove();
+                }
+            }, 150);
+        }, 5000);
 
-        toastElement.addEventListener('hidden.bs.toast', () => {
-            toastElement.remove();
-        });
+        const closeBtn = notification.querySelector('.btn-close');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => {
+                notification.remove();
+            });
+        }
     }
 }
