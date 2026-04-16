@@ -1,5 +1,5 @@
 import { ProductCardComponent } from "../../components/product-card/index.js";
-import { CatPage } from "../cat/index.js";
+import { EquipmentPage } from "../equipment/index.js";
 
 export class MainPage {
     constructor(parent) {
@@ -14,9 +14,9 @@ export class MainPage {
         return (
             `
                 <div class="container py-4">
-                    <h1 class="text-center mb-4">🐾 Кошкин дом </h1>
-                    <p class="text-center text-muted mb-4">Нажмите "Подробнее", чтобы узнать больше о каждой кошке</p>
-                    <div id="main-page" class="row row-cols-1 row-cols-md-3 g-4"></div>
+                    <h1 class="text-center mb-4">Лабораторное оборудование</h1>
+                    <p class="text-center text-muted mb-4">Нажмите "Подробнее", чтобы узнать больше об оборудовании</p>
+                    <div id="main-page" class="row g-4"></div>
                 </div>
             `
         );
@@ -24,67 +24,51 @@ export class MainPage {
 
     getData() {
         return [
+            // Первый ряд - 3 карточки
             {
                 id: 1,
-                src: "https://i.pinimg.com/736x/96/91/0c/96910c8a23f6b80db45a9333b1aa9a79.jpg",
-                title: "Пуша",
+                src: "https://www.microscopy.co.kr/wp-content/uploads/2024/03/BX53_00_Biological_microscope.png",
+                title: "Микроскоп",
                 text: "",
-                breed: "Сиамская",
-                age: "2 года",
-                character: "Ласковая, игривая"
+                type: "Оптический микроскоп",
+                magnification: "1000x",
+                resolution: "0.2 мкм"
             },
             {
                 id: 2,
-                src: "https://i.pinimg.com/1200x/b8/59/54/b859544fcc7fdf1a79af2302fec88c62.jpg",
-                title: "Барсик",
+                src: "https://snablab.ru/assets/images/products/211/2-dm0506-jpg.jpg",
+                title: "Центрифуга",
                 text: "",
-                breed: "Британский",
-                age: "3 года",
-                character: "Энергичный, активный"
+                type: "Лабораторная центрифуга",
+                speed: "15000 об/мин",
+                capacity: "24 пробирки"
             },
             {
                 id: 3,
-                src: "https://i.pinimg.com/1200x/f9/b9/e1/f9b9e1b498d84cb1e4bd3deb99792a9e.jpg",
-                title: "Рыжик",
+                src: "https://primelab.com/image/cache/catalog/blog/blog_137-1100x600.jpg",
+                title: "Спектрофотометр",
                 text: "",
-                breed: "Персидский",
-                age: "4 месяца",
-                character: "Спокойный, ласковый"
+                type: "УФ-видимый спектрофотометр",
+                wavelength: "190-1100 нм",
+                accuracy: "±0.5 нм"
             },
+            // Второй ряд - 1 карточка слева
             {
                 id: 4,
-                src: "https://i.pinimg.com/736x/1e/af/80/1eaf80e28f0287bc24dd4b9a884ebda8.jpg",
-                title: "Мурка",
+                src: "https://algimed.com/upload/iblock/504/file.jpg",
+                title: "Термоциклер",
                 text: "",
-                breed: "Абиссинский",
-                age: "1 год",
-                character: "Общительный, дружелюбный"
-            },
-            {
-                id: 5,
-                src: "https://i.pinimg.com/736x/6f/7e/c0/6f7ec079e436a3971572c93abe2d9eb8.jpg",
-                title: "Черныш",
-                text: "",
-                breed: "Бомбейский",
-                age: "4 года",
-                character: "Грациозный, спокойный"
-            },
-            {
-                id: 6,
-                src: "https://i.pinimg.com/1200x/fd/89/c1/fd89c128e3b109f677a45243cdfef80f.jpg",
-                title: "Симба",
-                text: "",
-                breed: "Мейн-кун",
-                age: "3 месяца",
-                character: "Гордый, независимый"
+                type: "ПЦР-амплификатор",
+                temperature: "4-99°C",
+                capacity: "96 пробирок"
             }
         ];
     }
 
     clickCard(e) {
         const cardId = e.target.dataset.id;
-        const catPage = new CatPage(this.parent, cardId);
-        catPage.render();
+        const equipmentPage = new EquipmentPage(this.parent, cardId);
+        equipmentPage.render();
     }
 
     render() {
@@ -93,9 +77,35 @@ export class MainPage {
         this.parent.insertAdjacentHTML('beforeend', html);
 
         const data = this.getData();
-        data.forEach((item) => {
-            const productCard = new ProductCardComponent(this.pageRoot);
+
+        // Первые 3 карточки в ряд
+        const firstRow = data.slice(0, 3);
+        const secondRow = data.slice(3, 4);
+
+        // Добавляем первый ряд (3 карточки)
+        const firstRowContainer = document.createElement('div');
+        firstRowContainer.className = 'row row-cols-1 row-cols-md-3 g-4 mb-4';
+        this.pageRoot.appendChild(firstRowContainer);
+
+        firstRow.forEach((item) => {
+            const productCard = new ProductCardComponent(firstRowContainer);
             productCard.render(item, this.clickCard.bind(this));
         });
+
+        // Добавляем второй ряд (1 карточка слева)
+        if (secondRow.length > 0) {
+            const secondRowContainer = document.createElement('div');
+            secondRowContainer.className = 'row';
+            this.pageRoot.appendChild(secondRowContainer);
+
+            const leftCol = document.createElement('div');
+            leftCol.className = 'col-md-4';
+            secondRowContainer.appendChild(leftCol);
+
+            secondRow.forEach((item) => {
+                const productCard = new ProductCardComponent(leftCol);
+                productCard.render(item, this.clickCard.bind(this));
+            });
+        }
     }
 }

@@ -1,5 +1,5 @@
 import { MainPage } from "./pages/main/index.js";
-import { CatPage } from "./pages/cat/index.js";
+import { EquipmentPage } from "./pages/equipment/index.js";
 
 let currentPage = null;
 
@@ -11,8 +11,8 @@ export function navigateTo(page, params = {}) {
         case 'main':
             currentPage = new MainPage(app);
             break;
-        case 'cat':
-            currentPage = new CatPage(app, params.catId);
+        case 'equipment':
+            currentPage = new EquipmentPage(app, params.equipmentId);
             break;
     }
 
