@@ -52,7 +52,6 @@ export class MainPage {
                 wavelength: "190-1100 нм",
                 accuracy: "±0.5 нм"
             },
-            // Второй ряд - 1 карточка слева
             {
                 id: 4,
                 src: "https://algimed.com/upload/iblock/504/file.jpg",
@@ -78,11 +77,9 @@ export class MainPage {
 
         const data = this.getData();
 
-        // Первые 3 карточки в ряд
         const firstRow = data.slice(0, 3);
         const secondRow = data.slice(3, 4);
 
-        // Добавляем первый ряд (3 карточки)
         const firstRowContainer = document.createElement('div');
         firstRowContainer.className = 'row row-cols-1 row-cols-md-3 g-4 mb-4';
         this.pageRoot.appendChild(firstRowContainer);
@@ -92,7 +89,6 @@ export class MainPage {
             productCard.render(item, this.clickCard.bind(this));
         });
 
-        // Добавляем второй ряд (1 карточка слева)
         if (secondRow.length > 0) {
             const secondRowContainer = document.createElement('div');
             secondRowContainer.className = 'row';
