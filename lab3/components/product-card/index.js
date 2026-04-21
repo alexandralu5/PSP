@@ -8,7 +8,7 @@ export class ProductCardComponent {
             `
                 <div class="col">
                     <div class="card equipment-card h-100" data-id="${data.id}" style="cursor: pointer;">
-                        <img src="${data.src}" class="card-img-top" alt="${data.title}" style="height: 200px; object-fit: cover;">
+                        <img src="${data.src}" class="equipment-img" alt="${data.title}">
                         <div class="card-body">
                             <h5 class="card-title">${data.title}</h5>
                             <p class="card-text text-muted">${data.type || 'Тип оборудования'}</p>

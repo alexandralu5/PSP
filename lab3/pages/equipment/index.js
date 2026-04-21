@@ -62,7 +62,7 @@ export class EquipmentPage {
     getHTML() {
         return (
             `
-                <div id="equipment-page"></div>
+                <div id="equipment-page" class="container py-4"></div>
             `
         );
     }
