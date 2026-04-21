@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "src": "https://www.microscopy.co.kr/wp-content/uploads/2024/03/BX53_00_Biological_microscope.png",
+    "title": "Микроскоп",
+    "text": "Оптический микроскоп"
+  },
+  {
+    "id": 2,
+    "src": "https://snablab.ru/assets/images/products/211/2-dm0506-jpg.jpg",
+    "title": "Центрифуга",
+    "text": "Лабораторная центрифуга"
+  },
+  {
+    "id": 3,
+    "src": "https://primelab.com/image/cache/catalog/blog/blog_137-1100x600.jpg",
+    "title": "Спектрофотометр",
+    "text": "УФ-видимый спектрофотометр"
+  },
+  {
+    "id": 5,
+    "src": "https://algimed.com/upload/iblock/504/file.jpg",
+    "title": "Термоциклер",
+    "text": "ПЦР-амплификатор"
+  },
+  {
+    "id": 6,
+    "src": "https://static.wikia.nocookie.net/symbolism/images/9/99/Sea.jpg/revision/latest/scale-to-width-down/3888?cb=20250401212251",
+    "title": "Новая акция",
+    "text": "Описание новой акции"
+  }
+]

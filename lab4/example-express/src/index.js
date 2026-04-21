@@ -1,16 +1,16 @@
 const express = require('express');
 const path = require('path');
-const stocksRouter = require('./routes/stocks');
-const stocksService = require('./services/stocksService');
+const equipmentRouter = require('./routes/equipment');
+const equipmentService = require('./services/equipmentService');
 
 const app = express();
-const PORT = 3000;
+const PORT = 3001;
 
 // Определяем путь к файлу данных
-const DATA_FILE_PATH = path.join(__dirname, 'data/stocks.json');
+const DATA_FILE_PATH = path.join(__dirname, 'data/equipment.json');
 
 // Инициализируем сервис с путем к файлу данных
-stocksService.init(DATA_FILE_PATH);
+equipmentService.init(DATA_FILE_PATH);
 
 // 1. Встроенный middleware для парсинга JSON
 app.use(express.json());
@@ -22,7 +22,7 @@ app.use((req, res, next) => {
 });
 
 // 3. Подключение маршрутов
-app.use('/stocks', stocksRouter);
+app.use('/equipment', equipmentRouter);
 
 // 4. Глобальная обработка 404
 app.use((req, res) => {

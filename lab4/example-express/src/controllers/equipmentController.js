@@ -1,23 +1,23 @@
-const stocksService = require('../services/stocksService');
+const equipmentService = require('../services/equipmentService');
 
-const getAllStocks = (req, res) => {
+const getAllEquipment = (req, res) => {
     const { title } = req.query;
-    const stocks = stocksService.findAll(title);
-    res.json(stocks);
+    const equipment = equipmentService.findAll(title);
+    res.json(equipment);
 };
 
-const getStockById = (req, res) => {
+const getEquipmentById = (req, res) => {
     const id = parseInt(req.params.id);
-    const stock = stocksService.findOne(id);
+    const equipment = equipmentService.findOne(id);
 
-    if (!stock) {
+    if (!equipment) {
         return res.status(404).json({ error: 'Карточка не найдена' });
     }
 
-    res.json(stock);
+    res.json(equipment);
 };
 
-const createStock = (req, res) => {
+const createEquipment = (req, res) => {
     const { src, title, text } = req.body;
 
     // Простая валидация
@@ -25,24 +25,24 @@ const createStock = (req, res) => {
         return res.status(400).json({ error: 'Не все поля заполнены' });
     }
 
-    const newStock = stocksService.create({ src, title, text });
+    const newStock = equipmentService.create({ src, title, text });
     res.status(201).json(newStock);
 };
 
-const updateStock = (req, res) => {
+const updateEquipment = (req, res) => {
     const id = parseInt(req.params.id);
-    const updatedStock = stocksService.update(id, req.body);
+    const updatedEquipment = equipmentService.update(id, req.body);
 
-    if (!updatedStock) {
+    if (!updatedEquipment) {
         return res.status(404).json({ error: 'Карточка не найдена' });
     }
 
-    res.json(updatedStock);
+    res.json(updatedEquipment);
 };
 
-const deleteStock = (req, res) => {
+const deleteEquipment = (req, res) => {
     const id = parseInt(req.params.id);
-    const success = stocksService.remove(id);
+    const success = equipmentService.remove(id);
 
     if (!success) {
         return res.status(404).json({ error: 'Карточка не найдена' });
@@ -52,9 +52,9 @@ const deleteStock = (req, res) => {
 };
 
 module.exports = {
-    getAllStocks,
-    getStockById,
-    createStock,
-    updateStock,
-    deleteStock
+    getAllEquipment,
+    getEquipmentById,
+    createEquipment,
+    updateEquipment,
+    deleteEquipment
 };
