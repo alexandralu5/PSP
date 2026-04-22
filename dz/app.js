@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { getAllModels, saveModel, deleteModel } from './idb.js';
 
-// Глобальные переменные для превью
+
 const previewScenes = new Map();
 
 export function createPreview(container, modelPath, onLoadCallback) {
@@ -21,7 +21,7 @@ export function createPreview(container, modelPath, onLoadCallback) {
     renderer.setPixelRatio(window.devicePixelRatio);
     container.appendChild(renderer.domElement);
 
-    // Освещение
+
     const ambientLight = new THREE.AmbientLight(0x404040);
     scene.add(ambientLight);
 
@@ -38,7 +38,7 @@ export function createPreview(container, modelPath, onLoadCallback) {
     loader.load(modelPath, (gltf) => {
         const model = gltf.scene;
 
-        // Центрируем модель
+
         const box = new THREE.Box3().setFromObject(model);
         const center = box.getCenter(new THREE.Vector3());
         const size = box.getSize(new THREE.Vector3());
@@ -49,7 +49,7 @@ export function createPreview(container, modelPath, onLoadCallback) {
 
         scene.add(model);
 
-        // Анимация вращения
+
         function animate() {
             requestAnimationFrame(animate);
             model.rotation.y += 0.005;
@@ -64,7 +64,6 @@ export function createPreview(container, modelPath, onLoadCallback) {
         if (onLoadCallback) onLoadCallback(false);
     });
 
-    // Обработчик изменения размера
     const resizeObserver = new ResizeObserver(() => {
         const newWidth = container.clientWidth;
         const newHeight = container.clientHeight;

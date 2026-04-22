@@ -72,7 +72,6 @@ export class MainPage {
         ];
     }
 
-    // ============ ЗАДАНИЕ 1.1 (1 уровень) ============
     concatenate(strings, separator) {
         let result = '';
         for (let i = 0; i < strings.length; i++) {
@@ -84,7 +83,6 @@ export class MainPage {
         return result;
     }
 
-    // ============ ЗАДАНИЕ 1.10 (1 уровень) ============
     erase(array) {
         const result = [];
         for (let i = 0; i < array.length; i++) {
@@ -95,7 +93,6 @@ export class MainPage {
         return result;
     }
 
-    // ============ ЗАДАНИЕ 2.8 (2 уровень) ============
     sumUnique(array) {
         const uniqueValues = [];
         let sum = 0;
@@ -116,7 +113,6 @@ export class MainPage {
         return sum;
     }
 
-    // ============ ЗАДАНИЕ 3.1 (3 уровень) ============
     merge(...objects) {
         const result = {};
         for (let i = 0; i < objects.length; i++) {
