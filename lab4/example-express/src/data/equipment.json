@@ -25,8 +25,14 @@
   },
   {
     "id": 6,
-    "src": "https://static.wikia.nocookie.net/symbolism/images/9/99/Sea.jpg/revision/latest/scale-to-width-down/3888?cb=20250401212251",
-    "title": "Новая акция",
-    "text": "Описание новой акции"
+    "src": "https://algimed.com/upload/iblock/504/file.jpg",
+    "title": "Новое оборудование",
+    "text": "Новое описание"
+  },
+  {
+    "id": 7,
+    "src": "https://primelab.com/image/cache/catalog/blog/blog_137-1100x600.jpg",
+    "title": "Новое оборудование",
+    "text": "Описание нового оборудования"
   }
 ]
