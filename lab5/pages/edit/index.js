@@ -28,7 +28,6 @@ export class EditPage {
         mainPage.render();
     }
 
-    // Загрузка данных существующей карточки через AJAX
     loadEquipmentData() {
         return new Promise((resolve, reject) => {
             ajax.get(equipmentUrls.getEquipmentById(this.equipmentId), (data, status) => {
@@ -41,7 +40,6 @@ export class EditPage {
         });
     }
 
-    // Сохранение данных (для 6 лабораторной)
     saveEquipment(formData) {
         const method = this.equipmentId ? 'PUT' : 'POST';
         const url = this.equipmentId
@@ -63,7 +61,6 @@ export class EditPage {
         const backButton = new BackButtonComponent(this.pageRoot);
         backButton.render(this.clickBack.bind(this));
 
-        // Показываем индикатор загрузки
         const loadingHtml = `
             <div class="text-center py-5">
                 <div class="spinner-border text-primary" role="status">
@@ -83,7 +80,6 @@ export class EditPage {
             src: ''
         };
 
-        // Если это редактирование существующей карточки - загружаем данные
         if (this.equipmentId) {
             try {
                 const loadedData = await this.loadEquipmentData();
@@ -102,11 +98,9 @@ export class EditPage {
             }
         }
 
-        // Удаляем индикатор загрузки
         const loadingDiv = this.pageRoot.querySelector('.text-center');
         if (loadingDiv) loadingDiv.remove();
 
-        // 5 лабораторная: isFifthLab = true (кнопки НЕАКТИВНЫ)
         const editForm = new EditFormComponent(this.pageRoot, this.equipmentId, true);
         editForm.render(data, this.saveEquipment.bind(this), (formData) => {
             console.log('Preview data:', formData);

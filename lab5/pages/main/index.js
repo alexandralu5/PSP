@@ -47,7 +47,7 @@ export class MainPage {
                     <div class="search-container mb-4">
                         <div class="row g-2 align-items-center">
                             <div class="col-md-8">
-                                <input type="text" class="search-input form-control" id="search-input" placeholder="🔍 Введите название или тип оборудования..." autocomplete="off">
+                                <input type="text" class="search-input form-control" id="search-input" placeholder="Поиск..." autocomplete="off">
                             </div>
                             <div class="col-md-2">
                                 <button id="search-btn" class="btn btn-primary w-100">🔍 Найти</button>

@@ -1,8 +1,8 @@
 export class EditFormComponent {
     constructor(parent, equipmentId = null, isFifthLab = true) {
         this.parent = parent;
-        this.equipmentId = equipmentId; // null = создание нового, число = редактирование
-        this.isFifthLab = isFifthLab;   // true = 5 лаба (кнопки неактивны)
+        this.equipmentId = equipmentId;
+        this.isFifthLab = isFifthLab;
     }
 
     getHTML(data) {
@@ -11,14 +11,13 @@ export class EditFormComponent {
         const title = isEdit ? `Редактирование: ${data.title}` : 'Добавление нового оборудования';
         const buttonText = isEdit ? 'Сохранить изменения' : 'Создать';
 
-        // Для 5 лабораторной: кнопка НЕАКТИВНА
         const saveButtonDisabled = this.isFifthLab ? 'disabled' : '';
         const saveButtonClass = this.isFifthLab ? 'btn-secondary' : 'btn-success';
 
         return (
             `
                 <div class="card mb-4 mt-4">
-                    <div class="card-header bg-primary text-white">
+                    <div class="card-header text-white" style="background-color: #02818a;">
                         <h3 class="mb-0">${title}</h3>
                     </div>
                     <div class="card-body">
@@ -58,8 +57,8 @@ export class EditFormComponent {
                                 <button type="button" class="btn ${saveButtonClass}" id="save-button" ${saveButtonDisabled}>
                                     💾 ${buttonText}
                                 </button>
-                                <button type="button" class="btn btn-info" id="preview-button">
-                                    👁️ Предпросмотр
+                                <button type="button" class="btn text-white" id="preview-button" style="background-color: #6cdebb;" >
+                                     Предпросмотр
                                 </button>
                             </div>
                         </form>
@@ -93,8 +92,8 @@ export class EditFormComponent {
     showPreview(data) {
         const previewHtml = `
             <div class="card mt-4">
-                <div class="card-header bg-info text-white">
-                    <h5 class="mb-0">👁️ Предпросмотр карточки</h5>
+                <div class="card-header text-white" style="background-color: #02818a;">
+                    <h5 class="mb-0"> Предпросмотр карточки</h5>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -128,7 +127,6 @@ export class EditFormComponent {
         const saveButton = document.getElementById('save-button');
         const previewButton = document.getElementById('preview-button');
 
-        // Кнопка сохранения НЕАКТИВНА в 5 лабе, поэтому обработчик не добавляем
         if (saveButton && !this.isFifthLab) {
             saveButton.addEventListener('click', () => {
                 if (onSave) onSave(this.getFormData());
