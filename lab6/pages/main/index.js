@@ -86,31 +86,16 @@ export class MainPage {
             return;
         }
 
-        const firstRow = items.slice(0, 3);
-        const secondRow = items.slice(3, 4);
+        // Динамическое отображение ВСЕХ карточек
+        // Разбиваем на строки по 3 карточки в каждой
+        for (let i = 0; i < items.length; i += 3) {
+            const rowContainer = document.createElement('div');
+            rowContainer.className = 'row row-cols-1 row-cols-md-3 g-4 mb-4';
+            cardsContainer.appendChild(rowContainer);
 
-        if (firstRow.length > 0) {
-            const firstRowContainer = document.createElement('div');
-            firstRowContainer.className = 'row row-cols-1 row-cols-md-3 g-4 mb-4';
-            cardsContainer.appendChild(firstRowContainer);
-
-            firstRow.forEach((item) => {
-                const productCard = new ProductCardComponent(firstRowContainer);
-                productCard.render(item, this.clickCard.bind(this), this.editCard.bind(this), this.deleteCard.bind(this));
-            });
-        }
-
-        if (secondRow.length > 0) {
-            const secondRowContainer = document.createElement('div');
-            secondRowContainer.className = 'row';
-            cardsContainer.appendChild(secondRowContainer);
-
-            const leftCol = document.createElement('div');
-            leftCol.className = 'col-md-4';
-            secondRowContainer.appendChild(leftCol);
-
-            secondRow.forEach((item) => {
-                const productCard = new ProductCardComponent(leftCol);
+            const rowItems = items.slice(i, i + 3);
+            rowItems.forEach((item) => {
+                const productCard = new ProductCardComponent(rowContainer);
                 productCard.render(item, this.clickCard.bind(this), this.editCard.bind(this), this.deleteCard.bind(this));
             });
         }
