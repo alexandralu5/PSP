@@ -1,26 +1,27 @@
-class EquipmentUrls {
+export class EquipmentUrls {
     constructor() {
-        this.baseUrl = 'http://localhost:3001';
+        // ВСЕГДА используем относительные пути, так как бэкенд раздает статику
+        this.baseUrl = '';
     }
 
     getEquipment() {
-        return `${this.baseUrl}/equipment`;
+        return `/equipment`;
     }
 
     getEquipmentById(id) {
-        return `${this.baseUrl}/equipment/${id}`;
+        return `/equipment/${id}`;
     }
 
     createEquipment() {
-        return `${this.baseUrl}/equipment`;
+        return `/equipment`;
     }
 
     removeEquipmentById(id) {
-        return `${this.baseUrl}/equipment/${id}`;
+        return `/equipment/${id}`;
     }
 
     updateEquipmentById(id) {
-        return `${this.baseUrl}/equipment/${id}`;
+        return `/equipment/${id}`;
     }
 }
 
